@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+    .container{
+        flex-direction: row;
+        outline:2px solid black;
+        display:flex;
+        font-size: 30px;
+        text-align: center;
+        height: 200px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        
+    }
+    .container>div{
+        outline:2px dashed black;
+        flex-basis: 100px;    
+        height: 100px;
+    }
+    .container>div:nth-child(odd){
+        background-color:rgb(231, 160, 229);
+        height: 100px;
+    }
+    
+    #box1,#box2,#box3,#box4,#box5{
+        align-items: center;
+        justify-items: center;
+    }
+    #box1{
+        flex: 1 0 250px;
+    }
+    #box2,#box3,#box4,#box5{
+        flex:1 1 150px;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="box1"> <p>1</p></div>
+        <div id="box2"> <p>2</p></div>
+        <div id="box3"> <p>3</p></div>
+        <div id="box4"> <p>4</p></div>
+        <div id="box5"> <p>5</p></div>
+</body>
+</html>

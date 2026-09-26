@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type="email"]{
+            border-radius:30px;
+            padding-left:30px;
+            border: 1px solid black;
+        }
+        section h2{
+            color:rgba(121, 2, 113, 0.47);
+        }
+        section>h2{
+            color:rgb(4, 126, 103);
+        }
+        h2~p{
+            color:rgb(26, 93, 122);
+            font-weight:bold;
+        }
+        h2+p{
+            color:rgb(221, 125, 8);
+        }
+
+
+        button{
+            width:200px;
+            height:100px;
+            background-color:rgb(196, 120, 224);
+        }
+        button:hover{
+            background-color:black;
+            color:white;
+        }
+        button:active{
+            background-color:rgb(136, 91, 99);
+            color:white;
+        }
+        button:focus{
+            background-color:rgb(102, 71, 145);
+            color:white;
+        }
+
+
+        input:checked{
+            accent-color:rgb(4, 126, 103);
+        }
+        input:not(:checked){
+            accent-color:rgb(196, 120, 224);
+        }
+
+        a:link{
+            color:blue;
+            text-decoration:none;
+            background-color:rgb(235, 230, 132);
+        }
+        a:visited{
+            color:rgb(4, 126, 103);
+        }
+    </style>
+
+</head>
+
+<body>
+    <section>
+        <h2>Login Page</h2>
+        <p>Welcome to the login page. Please enter your credentials below.</p>
+        <p>Note: All fields are required.</p>
+        <div>
+            <h2>Login Form</h2>
+        </div>
+    </section>
+
+
+        <input type="email" placeholder="Enter your email">
+    <br/>
+    <br/> 
+    <input type="password" placeholder="Enter your password" required>
+    <br/>
+    <br/>
+    
+    <input type="checkbox" checked/>
+    <input type="checkbox"/>
+ 
+    <br/>
+    <br/>
+    <button>Login</button>
+    <br/>
+    <br/>
+    <a href="#">Forgot Password?</a>
+    
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Card Stack Effect</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: black;
+    }
+
+    .container {
+      width: 100%;
+    }
+
+    .card {
+      height: 100vh;
+      width: 100%;
+      position: sticky;
+      top: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 80px;
+      color: white;
+    }
+
+    .card1 {
+      background: black;
+      z-index: 1;
+    }
+
+    .card2 {
+      background: greenyellow;
+      z-index: 2;
+      color: black;
+    }
+
+    .card3 {
+      background: blue;
+      z-index: 3;
+    }
+
+    .card4 {
+      background: red;
+      z-index: 4;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card card1">
+      CARD 1
+    </div>
+
+    <div class="card card2">
+      CARD 2
+    </div>
+
+    <div class="card card3">
+      CARD 3
+    </div>
+
+    <div class="card card4">
+      CARD 4
+    </div>
+
+  </div>
+
+</body>
+</html>

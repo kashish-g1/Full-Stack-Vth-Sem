@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Three Cards in One Box</title>
+  <style>
+   .container {
+      justify-content: center;
+      padding: 3%;
+      column-gap: 2%;
+      display: flex;
+      flex-wrap: wrap;
+      border: 1px solid #010101;
+    }
+
+    .card{
+      flex: 1;
+      border: 1px solid #070707;
+      padding: 3%;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      min-width: 100px;
+      margin: 3% 0 0 0s;  
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+      <div class="card">
+        <h3>Card 1</h3>
+    <p>Card 1 content goes here.</p>
+       
+      </div>
+      <div class="card">
+        <h3>Card 2</h3>
+       <p>Card 2 content goes here.</p>
+       
+      </div>
+      <div class="card">
+        <h3>Card 3</h3>
+      <p>Card 3 content goes here.</p>
+      
+      </div>
+    </div>
+  </div>
+</body>
+</html>

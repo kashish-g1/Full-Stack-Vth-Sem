@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Photo Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px;
+            background: #080707;
+        }
+
+        h1 {
+            color: #f6eeee;
+            text-align: center;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Photo Gallery</h1><br><br>
+    <main class="gallery">
+        <img src="https://picsum.photos/id/1015/600/450">
+        <img src="https://picsum.photos/id/1016/600/450">
+        <img src="https://picsum.photos/id/1025/600/450">
+        <img src="https://picsum.photos/id/1029/600/450">
+        <img src="https://picsum.photos/id/1035/600/450">
+        <img src="https://picsum.photos/id/1039/600/450">
+        <img src="https://picsum.photos/id/1043/600/450">
+        <img src="https://picsum.photos/id/1050/600/450">
+        <img src="https://picsum.photos/id/106/600/450">
+        <img src="https://picsum.photos/id/1074/600/450">
+        <img src="https://picsum.photos/id/1080/600/450">
+        <img src="https://picsum.photos/id/1084/600/450">
+    </main>
+</body>
+</html>
