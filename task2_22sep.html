@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Uniklo</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f8fafc;
+        }
+
+        nav {
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .search {
+            width: 40%;
+            padding: 8px;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .filter {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: 0;
+            padding: 9px;
+            border-radius: 5px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+        }
+
+        .card:hover {
+            box-shadow: 0 5px 10px #ddd;
+        }
+
+        .name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .old {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .rating {
+            color: #f59e0b;
+        }
+
+        @media (max-width: 1023px) {
+
+            .main {
+                display: block;
+            }
+
+            .filter {
+                margin-bottom: 20px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 639px) {
+
+            .search {
+                display: none;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+   <nav>
+        <div class="logo">
+            Uniklo
+        </div>
+
+        <input
+            class="search"
+            placeholder="Search products..."
+        >
+        <div>
+           <button>Cart</button>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="filter">
+            <h3>
+                Filters
+            </h3>
+            <b>
+                Category
+            </b>
+            <label>
+                <input type="checkbox">
+                Laptops
+            </label>
+            <label>
+                <input type="checkbox">
+                Mobiles
+            </label>
+            <label>
+                <input type="checkbox">
+                Tablets
+            </label>
+            <br>
+            <b>
+                Brand
+            </b>
+            <label>
+                <input type="checkbox">
+                Dell
+            </label>
+            <label>
+                <input type="checkbox">
+                HP
+            </label>
+            <label>
+                <input type="checkbox">
+                Lenovo
+            </label>
+            <button>
+                Apply Filters
+            </button>
+        </div>
+        <div>
+            <h2>
+                Shop Products
+            </h2>
+
+            <div class="products">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80">
+                    <p>
+                        Laptops
+                    </p>
+                    <div class="name">
+                        Dell Inspiron 15
+                    </div>
+                    <p>
+                        <span class="price">
+                            ₹45,990
+                        </span>
+                        <span class="old">
+                            ₹52,990
+                        </span>
+                    </p>
+                    <button>
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=80">
+
+                    <p>
+                        Laptops
+                    </p>
+                    <div class="name">
+                        HP Pavilion
+                    </div>
+                    <p>
+                        <span class="price">
+                            ₹52,990
+                        </span>
+                        <span class="old">
+                            ₹59,990
+                        </span>
+                    </p>
+                      <button>
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=500&q=80">
+                    <p>
+                        Laptops
+                    </p>
+                    <div class="name">
+                        Lenovo IdeaPad
+                    </div>
+                    <p>
+                        <span class="price">
+                            ₹39,990
+                        </span>
+                          <span class="old">
+                            ₹44,990
+                        </span>
+                    </p>
+                    <button>
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1611078489935-0cb964de46d6?auto=format&fit=crop&w=500&q=80">
+                    <p>
+                        Laptops
+                    </p>
+                    <div class="name">
+                        MacBook Air M2
+                    </div>
+                    <p>
+                        <span class="price">
+                            ₹79,990
+                        </span>
+                        <span class="old">
+                            ₹89,990
+                        </span>
+                    </p>
+                    <button>
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=500&q=80">
+                    <p>
+                        Laptops
+                    </p>
+                    <div class="name">
+                        ASUS VivoBook
+                    </div>
+                    <p>
+                        <span class="price">
+                            ₹41,990
+                        </span>
+                        <span class="old">
+                            ₹48,990
+                        </span>
+                    </p>
+                    <button>
+                        Add to Cart
+                    </button>
+                </div>
+
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=500&q=80">
+                    <p>
+                        Laptops
+                    </p>
+                    <div class="name">
+                        Dell XPS 13
+                    </div>
+                    <p>
+                        <span class="price">
+                            ₹89,990
+                        </span>
+                        <span class="old">
+                            ₹99,990
+                        </span>
+                    </p>
+
+                    <button>
+                        Add to Cart
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

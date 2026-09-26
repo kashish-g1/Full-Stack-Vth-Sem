@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Analytics Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #F1F5F9;
+            font-family: Arial, sans-serif;
+            color: #0F172A;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: #0F172A;
+            color: #CBD5E1;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #CBD5E1;
+            text-decoration: none;
+            padding: 11px;
+            margin: 5px 0;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover,
+        .sidebar .active {
+            background: #4F46E5;
+            color: white;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+        }
+
+        header {
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header input {
+            width: 240px;
+            padding: 9px;
+            border: 1px solid #E2E8F0;
+            border-radius: 7px;
+        }
+
+        .menu {
+            display: none;
+            background: #0F172A;
+            color: white;
+            border: 0;
+            padding: 8px;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* Cards */
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .kpis {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .label {
+            color: #64748B;
+            font-size: 14px;
+        }
+
+        .number {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .success {
+            color: #16A34A;
+            font-size: 13px;
+        }
+
+        /* Analytics */
+        .analytics {
+            grid-template-columns: 2fr 1fr;
+            margin-top: 24px;
+        }
+
+        .bottom {
+            grid-template-columns: 1fr 1fr;
+            margin-top: 24px;
+        }
+
+        .card h2 {
+            font-size: 16px;
+            margin-top: 0;
+        }
+
+        /* Simple Charts */
+        .chart {
+            height: 190px;
+            display: flex;
+            align-items: end;
+            gap: 10px;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 10px;
+        }
+
+        .bar {
+            flex: 1;
+            background: #4F46E5;
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Table */
+        .orders {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 11px;
+            border-bottom: 1px solid #E2E8F0;
+            white-space: nowrap;
+        }
+
+        .badge {
+            padding: 5px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .delivered {
+            background: #DCFCE7;
+            color: #16A34A;
+        }
+
+        .pending {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* Products */
+        .products p {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        /* Tablet */
+        @media (max-width: 1000px) {
+            .kpis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .analytics,
+            .bottom {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            header {
+                padding: 0 16px;
+            }
+
+            header input {
+                width: 170px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .kpis {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">AdminPro</div>
+
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Analytics</a>
+        <a href="#">Users</a>
+        <a href="#">Orders</a>
+        <a href="#">Products</a>
+        <a href="#">Settings</a>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <header>
+
+            <button class="menu">☰</button>
+
+            <input type="text" placeholder="Search...">
+
+            <span>Notifications &nbsp; Contact</span>
+
+        </header>
+
+
+        <section class="content">
+
+            <h1>Dashboard</h1>
+
+
+            <!-- KPI Cards -->
+            <div class="grid kpis">
+
+                <div class="card">
+                    <div class="label">Total Revenue</div>
+                    <div class="number">₹1,24,532</div>
+                    <div class="success">↑ 12% from last month</div>
+                </div>
+
+                <div class="card">
+                    <div class="label">Total Orders</div>
+                    <div class="number">892</div>
+                    <div class="success">↑ 8% from last month</div>
+                </div>
+
+                <div class="card">
+                    <div class="label">Active Users</div>
+                    <div class="number">3,521</div>
+                    <div class="success">↑ 14% from last month</div>
+                </div>
+
+                <div class="card">
+                    <div class="label">Conversion Rate</div>
+                    <div class="number">4.2%</div>
+                    <div class="success">↑ 2% from last month</div>
+                </div>
+
+            </div>
+
+
+            <!-- Revenue + Orders -->
+            <div class="grid analytics">
+
+                <div class="card">
+
+                    <h2>Revenue Overview</h2>
+
+                    <div class="chart">
+
+                        <div class="bar" style="height:35%"></div>
+                        <div class="bar" style="height:45%"></div>
+                        <div class="bar" style="height:40%"></div>
+                        <div class="bar" style="height:65%"></div>
+                        <div class="bar" style="height:58%"></div>
+                        <div class="bar" style="height:75%"></div>
+                        <div class="bar" style="height:68%"></div>
+                        <div class="bar" style="height:90%"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card orders">
+
+                    <h2>Recent Orders</h2>
+
+                    <table>
+
+                        <tr>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+
+                        <tr>
+                            <td>Rahul Sharma</td>
+                            <td>₹2,499</td>
+                            <td>
+                                <span class="badge delivered">
+                                    Delivered
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Priya Singh</td>
+                            <td>₹4,009</td>
+                            <td>
+                                <span class="badge pending">
+                                    Pending
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Amit Kumar</td>
+                            <td>₹1,299</td>
+                            <td>
+                                <span class="badge delivered">
+                                    Delivered
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Neha Gupta</td>
+                            <td>₹2,799</td>
+                            <td>
+                                <span class="badge delivered">
+                                    Delivered
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- Traffic + Products -->
+            <div class="grid bottom">
+
+                <div class="card">
+
+                    <h2>Traffic Overview</h2>
+
+                    <div class="chart">
+
+                        <div class="bar" style="height:30%"></div>
+                        <div class="bar" style="height:45%"></div>
+                        <div class="bar" style="height:38%"></div>
+                        <div class="bar" style="height:55%"></div>
+                        <div class="bar" style="height:70%"></div>
+                        <div class="bar" style="height:62%"></div>
+                        <div class="bar" style="height:85%"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card products">
+
+                    <h2>Top Products</h2>
+
+                    <p>
+                        <span>Laptop Pro</span>
+                        <b>2,450</b>
+                    </p>
+
+                    <p>
+                        <span>Wireless Earbuds</span>
+                        <b>1,900</b>
+                    </p>
+
+                    <p>
+                        <span>Smart Watch</span>
+                        <b>1,203</b>
+                    </p>
+
+                    <p>
+                        <span>Backpack</span>
+                        <b>902</b>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
