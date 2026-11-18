@@ -1,0 +1,93 @@
+//Closures Nov 4
+
+function manageCounter() {
+
+    let counter = 0;
+
+    function increment() {
+        counter++;
+        console.log(counter);
+    }
+
+    function decrement() {
+        counter--;
+        console.log(counter);
+    }
+
+    return {
+        increment: increment,
+        decrement: decrement
+    };
+}
+
+const a = manageCounter();
+a.increment();
+a.decrement();
+
+
+
+
+//Nov 5  Currying
+
+function a(x){
+    return function b(y){
+        return function c(z){
+            return x + y + z;
+        }
+    }
+}
+
+console.log(a(1)(2)(3)); // 6
+
+
+// Memoization
+
+function memoize(fn){
+    const cache = {};
+    return function(x,y){
+
+        const key = `${x},${y}`;
+
+        if (cache[key]){
+            console.log('from cache');
+            return cache[key];
+        }
+            const result = fn(x,y);
+            cache[key] = result;
+            return result;
+    }
+}
+const add = memoize(function(x,y){
+    return x + y;
+});
+
+
+// Factorial using memoization
+
+function factorial(n){
+    if (n === 0 || n === 1){
+        return 1;
+    }
+    return n * factorial(n-1);
+}
+
+const memoizedFactorial = memoize(factorial);
+
+console.log(memoizedFactorial(5)); // 120
+console.log(memoizedFactorial(5)); // from cache, 120
+console.log(memoizedFactorial(6)); // 720
+
+
+
+
+// Fibonacci using memoization
+
+function fibonacci(n){
+    if (n === 0) return 0;
+    if (n === 1) return 1;
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+
+const memoizedFibonacci = memoize(fibonacci);
+console.log(memoizedFibonacci(10)); // 55
+console.log(memoizedFibonacci(10)); // from cache, 55

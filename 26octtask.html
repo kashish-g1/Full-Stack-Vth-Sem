@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout | Northstar Goods</title>
+<style>
+:root { --bg:#f5f3ee; --panel:#fff; --line:#e7e2db; --text:#1f1f1f; --muted:#666; --accent:#2d2d2d; --danger:#b2564b; --green:#2d5a3b; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; }
+button, input { font:inherit; }
+button { cursor:pointer; }
+.topbar { height:70px; display:flex; align-items:center; padding:0 max(5vw, calc((100vw - 980px)/2)); background:#fff; border-bottom:1px solid var(--line); }
+.brand { font-weight:700; font-size:1.1rem; letter-spacing:-.05em; }
+main { width:min(980px,90%); margin:40px auto 60px; }
+h1 { margin:0 0 24px; font-size:clamp(2rem,4vw,2.7rem); letter-spacing:-.05em; }
+.layout { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr); gap:24px; align-items:start; }
+.panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px 20px; }
+.head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+h2 { margin:0; font-size:1.1rem; }
+.count { color:var(--muted); font-size:12px; }
+.item { display:grid; grid-template-columns:70px minmax(0,1fr) auto; gap:14px; align-items:center; padding:18px 0; border-bottom:1px solid var(--line); }
+.item:last-child { border-bottom:none; }
+.art { width:70px; height:70px; display:grid; place-items:center; border-radius:10px; background:#f8f5f2; font-size:28px; }
+.name { font-weight:700; font-size:14px; }
+.detail { margin-top:5px; color:var(--muted); font-size:12px; }
+.actions { display:flex; gap:12px; align-items:center; margin-top:12px; }
+.qty { display:inline-flex; align-items:center; height:32px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+.qty button { width:28px; height:28px; border:0; background:transparent; color:var(--accent); font-size:18px; }
+.qty input { width:28px; border:0; background:transparent; text-align:center; font-size:12px; font-weight:700; outline:none; appearance:textfield; }
+.remove { border:0; background:transparent; color:var(--danger); font-size:12px; padding:0; }
+.total-price { text-align:right; font-weight:700; font-size:14px; white-space:nowrap; }
+.unit { display:block; margin-top:4px; color:var(--muted); font-size:11px; font-weight:400; }
+.suggestion { margin-top:18px; padding:16px; border:1px solid var(--line); border-radius:10px; background:#faf8f6; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.label { color:var(--muted); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.price { margin-top:4px; color:var(--muted); font-size:12px; }
+.add { border:1px solid var(--line); background:#fff; border-radius:8px; padding:9px 12px; font-size:12px; font-weight:700; color:var(--accent); }
+.row { display:flex; justify-content:space-between; gap:12px; padding:8px 0; color:var(--muted); font-size:13px; }
+.row strong { color:var(--text); font-weight:700; }
+.row.discount strong { color:var(--green); }
+.shipping-note { color:var(--muted); font-size:11px; min-height:16px; line-height:1.5; }
+.promo { display:flex; gap:8px; margin-top:16px; }
+.promo input { flex:1; height:38px; border:1px solid var(--line); border-radius:8px; padding:0 10px; outline:none; }
+.promo button { border:0; background:#ededeb; color:var(--accent); border-radius:8px; padding:0 12px; font-weight:700; }
+.msg { min-height:18px; margin-top:8px; color:var(--muted); font-size:11px; }
+.total { padding-top:14px; margin-top:6px; border-top:1px solid var(--line); font-size:15px; font-weight:700; }
+.total strong { font-size:20px; }
+.checkout { width:100%; height:46px; margin-top:18px; border:0; border-radius:8px; background:var(--accent); color:#fff; font-weight:700; }
+.empty { padding:30px 12px; color:var(--muted); text-align:center; }
+@media (max-width:760px){ .layout{grid-template-columns:1fr;} main{margin-top:28px;} }
+@media (max-width:520px){ .item{grid-template-columns:58px minmax(0,1fr) auto; gap:10px;} .art{width:58px; height:58px; font-size:26px;} }
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">northstar</div></header>
+<main>
+  <h1>Your cart</h1>
+  <div class="layout">
+    <section class="panel">
+      <div class="head"><h2>Items</h2><span class="count" id="count"></span></div>
+      <div id="items"></div>
+      <div class="suggestion">
+        <div>
+          <div class="label">You might also like</div>
+          <div class="name">Everyday Canvas Tote</div>
+          <div class="price">18.00 · Recycled cotton</div>
+        </div>
+        <button class="add" id="add-suggestion" type="button">＋ Add</button>
+      </div>
+    </section>
+    <aside class="panel">
+      <h2>Order summary</h2>
+      <div class="row"><span>Subtotal</span><strong id="subtotal">0.00</strong></div>
+      <div class="row discount" id="discount-row" hidden><span>Discount</span><strong id="discount">−0.00</strong></div>
+      <div class="row"><span>Shipping</span><strong id="shipping">0.00</strong></div>
+      <div class="shipping-note" id="shipping-note"></div>
+      <div class="row"><span>Tax</span><strong id="tax">0.00</strong></div>
+      <form class="promo" id="promo-form">
+        <input id="promo-code" type="text" placeholder="Discount code" autocomplete="off" />
+        <button type="submit">Apply</button>
+      </form>
+      <div class="msg" id="promo-message">Use SAVE10 for 10% off.</div>
+      <div class="row total"><span>Total</span><strong id="total">0.00</strong></div>
+      <button class="checkout" id="checkout-button" type="button">Checkout</button>
+    </aside>
+  </div>
+</main>
+<script>
+const products = {
+  mug: { name: 'Stoneware Coffee Mug', detail: 'Sand · 12 oz', price: 24, icon: '☕' },
+  bottle: { name: 'Insulated Water Bottle', detail: 'Forest · 20 oz', price: 32, icon: '◉' },
+  notebook: { name: 'Linen Hardcover Notebook', detail: 'Natural · Ruled', price: 16, icon: '📓' },
+  tote: { name: 'Everyday Canvas Tote', detail: 'Natural · Recycled cotton', price: 18, icon: '👜' }
+};
+const cart = new Map([['mug', 1], ['bottle', 1], ['notebook', 2]]);
+let discountApplied = false;
+const money = n => n.toFixed(2);
+const items = document.getElementById('items');
+
+function renderCart() {
+  const entries = [...cart.entries()];
+  const count = entries.reduce((sum, [, qty]) => sum + qty, 0);
+  document.getElementById('count').textContent = `${count} ${count === 1 ? 'item' : 'items'}`;
+  items.innerHTML = entries.length
+    ? entries.map(([id, qty]) => {
+        const product = products[id];
+        return `<article class="item" data-product-id="${id}"><div class="art" aria-hidden="true">${product.icon}</div><div><div class="name">${product.name}</div><div class="detail">${product.detail}</div><div class="actions"><div class="qty"><button type="button" data-action="decrease">−</button><input type="number" min="1" max="99" value="${qty}" /><button type="button" data-action="increase">+</button></div><button class="remove" type="button" data-action="remove">Remove</button></div></div><div class="total-price">${money(product.price * qty)}<span class="unit">${money(product.price)} each</span></div></article>`;
+      }).join('')
+    : '<div class="empty">Your bag is empty. Add a suggested item to get started.</div>';
+  const addBtn = document.getElementById('add-suggestion');
+  addBtn.textContent = cart.has('tote') ? '✓ Added' : '＋ Add';
+  addBtn.disabled = cart.has('tote');
+  updateSummary();
+}
+
+function updateSummary() {
+  const subtotal = [...cart].reduce((sum, [id, qty]) => sum + products[id].price * qty, 0);
+  const discount = discountApplied ? subtotal * 0.1 : 0;
+  const discounted = subtotal - discount;
+  const shipping = subtotal === 0 || discounted >= 60 ? 0 : 5.95;
+  const tax = discounted * 0.08;
+  document.getElementById('subtotal').textContent = money(subtotal);
+  document.getElementById('discount-row').hidden = !discountApplied;
+  document.getElementById('discount').textContent = `−${money(discount)}`;
+  document.getElementById('shipping').textContent = shipping === 0 ? (subtotal === 0 ? '—' : 'Free') : money(shipping);
+  document.getElementById('shipping-note').textContent = subtotal > 0 && shipping > 0 ? `Free shipping on orders of 60 or more. Add ${money(Math.max(0, 60 - discounted))} to qualify.` : '';
+  document.getElementById('tax').textContent = money(tax);
+  document.getElementById('total').textContent = money(discounted + shipping + tax);
+}
+
+items.addEventListener('click', event => {
+  const button = event.target.closest('button[data-action]');
+  if (!button) return;
+  const item = button.closest('[data-product-id]');
+  const id = item.dataset.productId;
+  const qty = cart.get(id);
+  if (button.dataset.action === 'remove' || (button.dataset.action === 'decrease' && qty === 1)) {
+    cart.delete(id);
+  } else if (button.dataset.action === 'decrease') {
+    cart.set(id, qty - 1);
+  } else if (button.dataset.action === 'increase' && qty < 99) {
+    cart.set(id, qty + 1);
+  }
+  renderCart();
+});
+
+items.addEventListener('change', event => {
+  if (!event.target.matches('input[type="number"]')) return;
+  const item = event.target.closest('[data-product-id]');
+  const qty = Number.parseInt(event.target.value, 10);
+  if (!Number.isFinite(qty) || qty < 1) {
+    cart.delete(item.dataset.productId);
+  } else {
+    cart.set(item.dataset.productId, Math.min(qty, 99));
+  }
+  renderCart();
+});
+
+document.getElementById('add-suggestion').addEventListener('click', () => {
+  cart.set('tote', (cart.get('tote') || 0) + 1);
+  renderCart();
+});
+
+document.getElementById('promo-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const code = document.getElementById('promo-code').value.trim().toUpperCase();
+  const msg = document.getElementById('promo-message');
+  if (code === 'SAVE10') {
+    discountApplied = true;
+    msg.textContent = 'SAVE10 applied — 10% off your items.';
+    msg.style.color = 'var(--green)';
+  } else {
+    discountApplied = false;
+    msg.textContent = "That code isn't valid. Try SAVE10.";
+    msg.style.color = '#a43e2d';
+  }
+  updateSummary();
+});
+
+document.getElementById('checkout-button').addEventListener('click', () => {
+  document.getElementById('promo-message').textContent = cart.size
+    ? 'Your order summary is ready. Connect this button to your payment flow to place the order.'
+    : 'Add an item to your bag before continuing to checkout.';
+});
+
+renderCart();
+</script>
+</body>
+</html>
